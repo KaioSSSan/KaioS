@@ -1,0 +1,45 @@
+def binary_to_text(binary_num):
+    s = ''
+    words = {'0': 'ноль', '1': 'один'}
+    for i in range(0, len(binary_num)):
+        s = s + words.get(binary_num[i], '') + ' '
+    return s
+
+def main():
+    buffer_len = 1                                                               #размер буфера чтения
+    work_buffer = ""                                                             #рабочий буфер
+    d_max = 0
+    s_max = ""
+    max = 0
+    min = None
+    with open("laba.txt", "r") as file:                                          #открываем файл
+        buffer = file.read(buffer_len)
+        if not buffer:
+            print("Файл пустой, добавьте данные в файл")                         #Если файл пуст
+
+
+        while buffer:                                                            #пока файл не пустой
+            while buffer >= '0' and buffer <= '1':
+                work_buffer += buffer
+                buffer = file.read(buffer_len)                                   #обработка текущего блока
+            if len(work_buffer) > 0:
+                if len(work_buffer) >= 1 and work_buffer[-2] == '1':                #Проверка, что 2-ая цифра справа  единица
+                    print("Число с второй cправа цифрой равной 1:", work_buffer)
+                    print("Требуемое число без единииц :", (work_buffer.replace("1","")))
+                if (len(work_buffer)) > 0:
+                    if int(work_buffer) > max:
+                        max = (int(work_buffer))
+                if min is None or int(work_buffer) < min:
+                    min = (int(work_buffer))
+
+                work_buffer = ''
+                buffer = file.read(buffer_len)
+
+    r = str(max)
+    b = str(min)
+    t = bin((int(r, 2) + int(b, 2))//2)[2:]
+    print('Среднее арифметическое:', t)
+    binary_num = t
+    print('Среднее арифметическое прописью:', binary_to_text(binary_num))
+
+main()
