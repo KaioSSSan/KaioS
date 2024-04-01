@@ -1,0 +1,47 @@
+import re
+
+
+patten = r'\b\d*1\d\b'
+def binary_to_text(binary_num):
+    s = ''
+    words = {'0': 'ноль', '1': 'один'}
+    for i in range(0, len(binary_num)):
+        s = s + words.get(binary_num[i], '') + ' '
+    return s
+
+
+
+
+with open("laba.txt", "r") as file:
+    numss = []
+    for line in file:
+        nums = [int(num) for num in line.split() if num.isdigit()]
+
+    for num in nums:
+        if re.findall(patten, str(num)):
+            numss.append(num)
+            print(numss)
+
+    if not numss:
+        print("Нет подходящих чисел ")
+    else:
+        print("Список чисел", numss)
+        max_value = max(numss)
+        min_value = min(numss)
+        for num in numss:
+            wtht_one = re.sub('1', '', str(num))
+            print("Список без единиц:", wtht_one)
+        avg_num = str((max_value + min_value) // 2)
+        avg_words = binary_to_text(avg_num)
+        print("Среднее число между макс и мин :", avg_num)
+
+
+
+
+
+
+
+
+
+
+
