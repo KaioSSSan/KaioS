@@ -1,24 +1,35 @@
+#Лабораторная работа №2
+#Написать программу, решающую задачу из 1 лабораторной работы (в соответствии со своим вариантом) со следующими изменениями:
+#1.	Входной файл является обыкновенным (т.е. нет требования на «бесконечность» файла);
+#2.	Распознавание и обработку делать  через регулярные выражения;
+#3.	В вариантах, где есть параметр (например К), допускается его заменить на любое число;
+#4.	Все остальные требования соответствуют варианту задания лабораторной работы №1.
+
+#Вариант - 13
+#Нечетные двоичные числа, не превышающие 102410, у которых вторая справа цифра равна 1. 
+#Выводит на экран цифры числа, исключая единицы. Вычисляется среднее число между минимальным и максимальным и выводится прописью.
+
+
+
+
+
 import re
+pattern = r'\b\d*1\d\b'                          #Само регулярное выражение 
 
-
-patten = r'\b\d*1\d\b'
-def binary_to_text(binary_num):
+def binary_to_text(binary_num):                    #Функция для преобразования числа в пропись
     s = ''
     words = {'0': 'ноль', '1': 'один'}
     for i in range(0, len(binary_num)):
         s = s + words.get(binary_num[i], '') + ' '
     return s
 
-
-
-
-with open("laba.txt", "r") as file:
+with open("laba.txt", "r") as file:                     #Чтение файла
     numss = []
     for line in file:
         nums = [int(num) for num in line.split() if num.isdigit()]
 
     for num in nums:
-        if re.findall(patten, str(num)):
+        if re.findall(pattern, str(num)):                     #Поиск числа по заданному паттерну 
             numss.append(num)
             print(numss)
 
@@ -26,13 +37,13 @@ with open("laba.txt", "r") as file:
         print("Нет подходящих чисел ")
     else:
         print("Список чисел", numss)
-        max_value = max(numss)
-        min_value = min(numss)
+        max_val = max(numss)                              #Поиск максимума и минимума соответственно                         
+        min_val = min(numss)
         for num in numss:
-            wtht_one = re.sub('1', '', str(num))
+            wtht_one = re.sub('1', '', str(num))            #Исключение единиц в числе
             print("Список без единиц:", wtht_one)
-        avg_num = str((max_value + min_value) // 2)
-        avg_words = binary_to_text(avg_num)
+        avg_num = str((max_val + min_val) // 2)                #Среднее арифметическое минимума и максимума
+        avg_to_txt = binary_to_text(avg_num)                    #Среднее арифметическое прописью
         print("Среднее число между макс и мин :", avg_num)
 
 
