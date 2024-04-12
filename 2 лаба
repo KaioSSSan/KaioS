@@ -14,7 +14,7 @@
 
 
 import re
-pattern = r'\b\d*1\d\b'                          #Само регулярное выражение 
+                         
 
 def binary_to_text(binary_num):                    #Функция для преобразования числа в пропись
     s = ''
@@ -29,7 +29,7 @@ with open("laba.txt", "r") as file:                     #Чтение файла
         nums = [int(num) for num in line.split() if num.isdigit()]
 
     for num in nums:
-        if re.findall(pattern, str(num)):                     #Поиск числа по заданному паттерну 
+        if re.findall('^[01][01]{7} *11$', str(num)):                     #Поиск числа по заданному паттерну 
             numss.append(num)
             print(numss)
 
@@ -40,7 +40,8 @@ with open("laba.txt", "r") as file:                     #Чтение файла
         max_val = max(numss)                              #Поиск максимума и минимума соответственно                         
         min_val = min(numss)
         for num in numss:
-            wtht_one = re.sub('1', '', str(num))            #Исключение единиц в числе
+            num = str(num)
+            wtht_one = num.replace('1', '')            #Исключение единиц в числе
             print("Список без единиц:", wtht_one)
         avg_num = str((max_val + min_val) // 2)                #Среднее арифметическое минимума и максимума
         avg_to_txt = binary_to_text(avg_num)                    #Среднее арифметическое прописью
