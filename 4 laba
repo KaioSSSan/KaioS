@@ -53,6 +53,16 @@ def plot_matrix(matrix):
     plt.colorbar()
     plt.show()
 
+def plots_mtarix(matrix):
+    plt.hist(matrix)
+    plt.colorbar()
+    plt.show()
+
+def plrts_matrix(matrix):
+    plt.pie(matrix)
+    plt.colorbar()
+    plt.show()
+
 
 def main():
     K = int(input("Введите число K: "))
@@ -61,10 +71,13 @@ def main():
     A = generate_matrix(N)
     print("\nМатрица A:\n", A)
     plot_matrix(A)
+    plrts_matrix(A)
+    plots_mtarix((A))
 
     F = form_matrix_F(A.copy())
     print("\nМатрица F:\n", F)
     plot_matrix(F)
-
+    plrts_matrix((A))
+    plots_mtarix(A)
 
 main()
